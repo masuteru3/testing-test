@@ -58,6 +58,19 @@ export default {
       history: []
     }
   },
+  watch: {
+    // feedbackを一定時間表示後に消す
+    feedback(newValue) {
+      if (newValue) {
+        setTimeout(() => {
+          this.feedback = ''
+        }, 4000)
+      }
+    }
+  },
+  mounted() {
+    this.history = JSON.parse(localStorage.getItem('history')) || []
+  },
   methods: {
     submit() {
       // TODO: 小数点を入力できるように
@@ -69,7 +82,6 @@ export default {
         this.feedback = ''
       }
 
-      this.fillZero()
       this.calculate()
       this.setHistories()
     },
@@ -82,6 +94,9 @@ export default {
     },
 
     calculate() {
+      this.num1 = this.num1 || 0
+      this.num2 = this.num2 || 0
+
       if (this.mode === 'plus') this.result = this.num1 + this.num2
       if (this.mode === 'minus') this.result = this.num1 - this.num2
       if (this.mode === 'times') this.result = this.num1 * this.num2
@@ -95,24 +110,7 @@ export default {
         result: this.result
       })
       localStorage.setItem('history', JSON.stringify(this.history))
-    },
-    fillZero() {
-      this.num1 ? this.num1 : (this.num1 = 0)
-      this.num2 ? this.num2 : (this.num2 = 0)
     }
-  },
-  watch: {
-    // feedbackを一定時間表示後に消す
-    feedback(newValue) {
-      if (newValue) {
-        setTimeout(() => {
-          this.feedback = ''
-        }, 4000)
-      }
-    }
-  },
-  mounted() {
-    this.history = JSON.parse(localStorage.getItem('history')) || []
   }
 }
 </script>
