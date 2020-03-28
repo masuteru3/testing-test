@@ -27,7 +27,7 @@
       </form>
 
       <transition name="fade">
-        <p v-if="result" class="result">result: {{ result }}</p>
+        <p v-if="result || (result === 0)" class="result">result: {{ result }}</p>
       </transition>
       <transition name="fade">
         <p v-if="feedback" class="feedback">{{ feedback }}</p>
