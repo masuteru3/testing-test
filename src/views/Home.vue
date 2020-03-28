@@ -124,7 +124,7 @@ export default {
       }
     },
     setHistories() {
-      this.history.push({
+      this.history.unshift({
         mode: this.mode,
         num1: this.num1,
         num2: this.num2,
