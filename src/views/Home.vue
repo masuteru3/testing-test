@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import History from '@/components/History';
+import History from '@/components/History'
 export default {
   name: 'Home',
   components: {
@@ -56,14 +56,15 @@ export default {
 
       feedback: '',
       history: []
-    };
+    }
   },
   methods: {
     submit() {
       // TODO: 小数点を入力できるように
 
       if (!this.num1 && !this.num2) {
-        this.feedback = '適切な値を入力してください'; return;
+        this.feedback = '適切な値を入力してください'
+        return
       } else {
         this.feedback = ''
       }
@@ -79,12 +80,12 @@ export default {
       this.result = null
       this.feedback = ''
     },
-    
+
     calculate() {
-      if ( this.mode === 'plus' ) this.result = this.num1 + this.num2
-      if ( this.mode === 'minus' ) this.result = this.num1 - this.num2
-      if ( this.mode === 'times' ) this.result = this.num1 * this.num2
-      if ( this.mode === 'divide' ) this.result = this.num1 / this.num2
+      if (this.mode === 'plus') this.result = this.num1 + this.num2
+      if (this.mode === 'minus') this.result = this.num1 - this.num2
+      if (this.mode === 'times') this.result = this.num1 * this.num2
+      if (this.mode === 'divide') this.result = this.num1 / this.num2
     },
     setHistories() {
       this.history.push({
@@ -96,8 +97,8 @@ export default {
       localStorage.setItem('history', JSON.stringify(this.history))
     },
     fillZero() {
-      this.num1 ? this.num1 : this.num1 = 0
-      this.num2 ? this.num2 : this.num2 = 0
+      this.num1 ? this.num1 : (this.num1 = 0)
+      this.num2 ? this.num2 : (this.num2 = 0)
     }
   },
   watch: {
@@ -105,15 +106,15 @@ export default {
     feedback(newValue) {
       if (newValue) {
         setTimeout(() => {
-          this.feedback = '';
-        }, 4000);
+          this.feedback = ''
+        }, 4000)
       }
     }
   },
   mounted() {
-    this.history = JSON.parse(localStorage.getItem('history')) || [];
+    this.history = JSON.parse(localStorage.getItem('history')) || []
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

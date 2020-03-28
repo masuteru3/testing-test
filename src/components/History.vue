@@ -53,7 +53,8 @@ table {
     color: white;
     font-weight: normal;
   }
-  th, td {
+  th,
+  td {
     padding: 0.3em 0;
   }
 }
