@@ -42,7 +42,7 @@ h3 {
   margin-bottom: 8px;
 }
 table {
-  margin: 0 auto;
+  margin: 0 auto 40px;
   width: 400px;
   border-collapse: collapse;
   tr:nth-child(even) {

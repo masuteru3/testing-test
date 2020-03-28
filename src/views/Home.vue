@@ -42,6 +42,7 @@
 
 <script>
 import History from '@/components/History'
+import { add, subtract, multiply, divide, bignumber, round } from 'mathjs'
 export default {
   name: 'Home',
   components: {
@@ -73,8 +74,6 @@ export default {
   },
   methods: {
     submit() {
-      // TODO: 小数点を入力できるように
-
       if (!this.num1 && !this.num2) {
         this.feedback = '適切な値を入力してください'
         return
@@ -94,13 +93,35 @@ export default {
     },
 
     calculate() {
+      // 値がnull等の場合、０を代入
       this.num1 = this.num1 || 0
       this.num2 = this.num2 || 0
 
-      if (this.mode === 'plus') this.result = this.num1 + this.num2
-      if (this.mode === 'minus') this.result = this.num1 - this.num2
-      if (this.mode === 'times') this.result = this.num1 * this.num2
-      if (this.mode === 'divide') this.result = this.num1 / this.num2
+      switch (this.mode) {
+        case 'plus': {
+          let answer = add(bignumber(this.num1), bignumber(this.num2)).toNumber()
+          this.result = round(answer, 2)
+          break
+        }
+        case 'minus': {
+          let answer = subtract(bignumber(this.num1), bignumber(this.num2)).toNumber()
+          this.result = round(answer, 2)
+          break
+        }
+        case 'times': {
+          let answer = multiply(bignumber(this.num1), bignumber(this.num2)).toNumber()
+          this.result = round(answer, 2)
+          break
+        }
+        case 'divide': {
+          let answer = divide(bignumber(this.num1), bignumber(this.num2)).toNumber()
+          this.result = round(answer, 2)
+          break
+        }
+        default:
+          console.log('calculate error')
+          break
+      }
     },
     setHistories() {
       this.history.push({
