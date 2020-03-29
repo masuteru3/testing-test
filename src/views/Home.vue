@@ -27,7 +27,7 @@
       </form>
 
       <transition name="fade">
-        <p v-if="result || (result === 0)" class="result">result: {{ result }}</p>
+        <p v-if="result || result === 0" class="result">result: {{ result }}</p>
       </transition>
       <transition name="fade">
         <p v-if="feedback" class="feedback">{{ feedback }}</p>
@@ -43,6 +43,7 @@
 <script>
 import History from '@/components/History'
 import { add, subtract, multiply, divide, bignumber, round } from 'mathjs'
+
 export default {
   name: 'Home',
   components: {
@@ -99,22 +100,22 @@ export default {
 
       switch (this.mode) {
         case 'plus': {
-          let answer = add(bignumber(this.num1), bignumber(this.num2)).toNumber()
+          const answer = add(bignumber(this.num1), bignumber(this.num2)).toNumber()
           this.result = round(answer, 2)
           break
         }
         case 'minus': {
-          let answer = subtract(bignumber(this.num1), bignumber(this.num2)).toNumber()
+          const answer = subtract(bignumber(this.num1), bignumber(this.num2)).toNumber()
           this.result = round(answer, 2)
           break
         }
         case 'times': {
-          let answer = multiply(bignumber(this.num1), bignumber(this.num2)).toNumber()
+          const answer = multiply(bignumber(this.num1), bignumber(this.num2)).toNumber()
           this.result = round(answer, 2)
           break
         }
         case 'divide': {
-          let answer = divide(bignumber(this.num1), bignumber(this.num2)).toNumber()
+          const answer = divide(bignumber(this.num1), bignumber(this.num2)).toNumber()
           this.result = round(answer, 2)
           break
         }
