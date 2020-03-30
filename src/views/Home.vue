@@ -101,7 +101,7 @@ export default {
       switch (this.mode) {
         case 'plus': {
           const answer = add(bignumber(this.num1), bignumber(this.num2)).toNumber()
-          this.result = round(answer, 2)
+          this.result = round(answer, 2) // 小数２桁まで
           break
         }
         case 'minus': {

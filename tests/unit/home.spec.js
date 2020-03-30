@@ -9,6 +9,12 @@ describe('Home.vue', () => {
       wrapper.find('form').trigger('submit.prevent')
       expect(wrapper.vm.result).toBe(8)
     })
+    it('[minus]submit and result', () => {
+      const wrapper = shallowMount(Home)
+      wrapper.setData({ mode: 'minus', num1: 5, num2: 7.3 })
+      wrapper.find('form').trigger('submit.prevent')
+      expect(wrapper.vm.result).toBe(-2.3)
+    })
     it('[times]submit and result', () => {
       const wrapper = shallowMount(Home)
       wrapper.setData({ mode: 'times', num1: 2.2, num2: 3 })

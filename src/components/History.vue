@@ -12,7 +12,7 @@
         <td>{{ history.num1 }}</td>
         <td>{{ history.mode | symbol }}</td>
         <td>{{ history.num2 }}</td>
-        <td class="bold">{{ history.result }}</td>
+        <td class="result">{{ history.result }}</td>
       </tr>
     </table>
   </div>
@@ -59,7 +59,7 @@ table {
   }
 }
 
-.bold {
+.result {
   font-weight: bold;
 }
 </style>
