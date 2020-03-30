@@ -27,7 +27,7 @@
       </form>
 
       <transition name="fade">
-        <p v-if="result || result === 0" class="result">result: {{ result }}</p>
+        <p v-if="result || result === 0" class="result">結果： <span>{{ result }}</span></p>
       </transition>
       <transition name="fade">
         <p v-if="feedback" class="feedback">{{ feedback }}</p>
@@ -35,7 +35,7 @@
     </div>
 
     <transition name="fade">
-      <History v-if="history.length" :histories="history" />
+      <History v-if="history.length" :histories="history" @on-clear="clearHistory" />
     </transition>
   </div>
 </template>
@@ -83,7 +83,7 @@ export default {
       }
 
       this.calculate()
-      this.setHistories()
+      this.addHistory()
     },
     resetParams() {
       this.mode = '+'
@@ -92,45 +92,34 @@ export default {
       this.result = null
       this.feedback = ''
     },
+    clearHistory(index) {
+      this.history.splice(index, 1)
+      this.setStrage()
+    },
 
     calculate() {
       // 値がnull等の場合、０を代入
       this.num1 = this.num1 || 0
       this.num2 = this.num2 || 0
 
-      switch (this.mode) {
-        case '+': {
-          const answer = add(bignumber(this.num1), bignumber(this.num2)).toNumber()
-          this.result = round(answer, 2) // 小数２桁まで
-          break
-        }
-        case '-': {
-          const answer = subtract(bignumber(this.num1), bignumber(this.num2)).toNumber()
-          this.result = round(answer, 2)
-          break
-        }
-        case '*': {
-          const answer = multiply(bignumber(this.num1), bignumber(this.num2)).toNumber()
-          this.result = round(answer, 2)
-          break
-        }
-        case '/': {
-          const answer = divide(bignumber(this.num1), bignumber(this.num2)).toNumber()
-          this.result = round(answer, 2)
-          break
-        }
-        default:
-          console.log('calculate error')
-          break
-      }
+      let answer = null
+      if (this.mode === '+') answer = add(bignumber(this.num1), bignumber(this.num2)).toNumber()
+      if (this.mode === '-') answer = subtract(bignumber(this.num1), bignumber(this.num2)).toNumber()
+      if (this.mode === '*') answer = multiply(bignumber(this.num1), bignumber(this.num2)).toNumber()
+      if (this.mode === '/') answer = divide(bignumber(this.num1), bignumber(this.num2)).toNumber()
+
+      this.result = round(answer, 2)
     },
-    setHistories() {
+    addHistory() {
       this.history.unshift({
         mode: this.mode,
         num1: this.num1,
         num2: this.num2,
         result: this.result
       })
+      this.setStrage()
+    },
+    setStrage() {
       localStorage.setItem('history', JSON.stringify(this.history))
     }
   }
@@ -158,6 +147,13 @@ select {
 }
 .explain {
   font-size: 0.7em;
+}
+.result {
+  margin-top: 20px;
+  span {
+    font-size: 1.1em;
+    font-weight: bold;
+  }
 }
 .feedback {
   color: crimson;

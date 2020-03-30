@@ -7,12 +7,14 @@
         <th></th>
         <th>値２</th>
         <th>結果</th>
+        <th></th>
       </tr>
       <tr v-for="(history, index) in histories" :key="index">
         <td>{{ history.num1 }}</td>
         <td>{{ history.mode }}</td>
         <td>{{ history.num2 }}</td>
         <td class="result">{{ history.result }}</td>
+        <td class="clear" @click="$emit('on-clear', index)">×</td>
       </tr>
     </table>
   </div>
@@ -53,5 +55,8 @@ table {
 
 .result {
   font-weight: bold;
+}
+.clear {
+  cursor: pointer;
 }
 </style>
