@@ -4,10 +4,10 @@
       <h1>Vue Testing Sample</h1>
       <h3>
         <select v-model="mode">
-          <option value="plus">足し算</option>
-          <option value="minus">引き算</option>
-          <option value="times">掛け算</option>
-          <option value="divide">割り算</option>
+          <option value="+">足し算</option>
+          <option value="-">引き算</option>
+          <option value="*">掛け算</option>
+          <option value="/">割り算</option>
         </select>
         <span>をします</span>
       </h3>
@@ -51,7 +51,7 @@ export default {
   },
   data() {
     return {
-      mode: 'plus',
+      mode: '+',
       num1: null,
       num2: null,
       result: null,
@@ -86,7 +86,7 @@ export default {
       this.setHistories()
     },
     resetParams() {
-      this.mode = 'plus'
+      this.mode = '+'
       this.num1 = null
       this.num2 = null
       this.result = null
@@ -99,22 +99,22 @@ export default {
       this.num2 = this.num2 || 0
 
       switch (this.mode) {
-        case 'plus': {
+        case '+': {
           const answer = add(bignumber(this.num1), bignumber(this.num2)).toNumber()
           this.result = round(answer, 2) // 小数２桁まで
           break
         }
-        case 'minus': {
+        case '-': {
           const answer = subtract(bignumber(this.num1), bignumber(this.num2)).toNumber()
           this.result = round(answer, 2)
           break
         }
-        case 'times': {
+        case '*': {
           const answer = multiply(bignumber(this.num1), bignumber(this.num2)).toNumber()
           this.result = round(answer, 2)
           break
         }
-        case 'divide': {
+        case '/': {
           const answer = divide(bignumber(this.num1), bignumber(this.num2)).toNumber()
           this.result = round(answer, 2)
           break

@@ -10,7 +10,7 @@
       </tr>
       <tr v-for="(history, index) in histories" :key="index">
         <td>{{ history.num1 }}</td>
-        <td>{{ history.mode | symbol }}</td>
+        <td>{{ history.mode }}</td>
         <td>{{ history.num2 }}</td>
         <td class="result">{{ history.result }}</td>
       </tr>
@@ -23,14 +23,6 @@ export default {
   props: {
     histories: {
       type: Array
-    }
-  },
-  filters: {
-    symbol(value) {
-      if (value === 'plus') return '+'
-      if (value === 'minus') return '-'
-      if (value === 'times') return '*'
-      if (value === 'divide') return '/'
     }
   }
 }
