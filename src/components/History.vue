@@ -1,20 +1,20 @@
 <template>
   <div class="history">
-    <h3>履歴</h3>
-    <table>
-      <tr>
-        <th>値１</th>
-        <th></th>
-        <th>値２</th>
-        <th>結果</th>
-        <th></th>
+    <h3 class="history__title">履歴</h3>
+    <table class="history__table">
+      <tr class="history__table-header">
+        <th class="history__table-cell">値１</th>
+        <th class="history__table-cell"></th>
+        <th class="history__table-cell">値２</th>
+        <th class="history__table-cell">結果</th>
+        <th class="history__table-cell"></th>
       </tr>
-      <tr v-for="(history, index) in histories" :key="index">
-        <td>{{ history.num1 }}</td>
-        <td>{{ history.mode }}</td>
-        <td>{{ history.num2 }}</td>
-        <td class="result">{{ history.result }}</td>
-        <td class="clear" @click="$emit('on-clear', index)">×</td>
+      <tr v-for="(history, index) in histories" :key="index" class="history__table-item">
+        <td class="history__table-cell">{{ history.num1 }}</td>
+        <td class="history__table-cell">{{ history.mode }}</td>
+        <td class="history__table-cell">{{ history.num2 }}</td>
+        <td class="history__table-cell history__table-cell--result">{{ history.result }}</td>
+        <td class="history__table-cell history__table-cell--clear-item" @click="$emit('on-clear', index)" title="リストの削除">×</td>
       </tr>
     </table>
   </div>
@@ -31,32 +31,38 @@ export default {
 </script>
 
 <style scoped lang="scss">
-h3 {
-  margin-top: 80px;
-  margin-bottom: 8px;
-}
-table {
-  margin: 0 auto 40px;
-  width: 400px;
-  border-collapse: collapse;
-  tr:nth-child(even) {
-    background-color: #f2f2f2;
+.history {
+  &__title {
+    margin-top: 80px;
+    margin-bottom: 8px;
   }
-  th {
+  &__table {
+    margin: 0 auto 40px;
+    width: 400px;
+    border-collapse: collapse;
+  }
+  &__table-header {
     background-color: #4caf50;
     color: white;
+  }
+  &__table-cell {
     font-weight: normal;
   }
-  th,
-  td {
-    padding: 0.3em 0;
+  &__table-item:nth-child(even) {
+    background-color: #f2f2f2;
   }
-}
+  &__table-cell {
+    padding: 0.3em 0;
 
-.result {
-  font-weight: bold;
-}
-.clear {
-  cursor: pointer;
-}
+    &--result {
+      font-weight: bold;
+    }
+    &--clear-item {
+      cursor: pointer;
+    }
+    &--clear-item:hover {
+      font-weight: bold;
+    }
+  }
+} 
 </style>
