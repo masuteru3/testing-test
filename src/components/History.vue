@@ -13,7 +13,7 @@
         <td class="history__table-cell">{{ history.num1 }}</td>
         <td class="history__table-cell">{{ history.mode }}</td>
         <td class="history__table-cell">{{ history.num2 }}</td>
-        <td class="history__table-cell history__table-cell--result">{{ history.result }}</td>
+        <td id="result" class="history__table-cell history__table-cell--result">{{ history.result }}</td>
         <td class="history__table-cell history__table-cell--clear-item" @click="$emit('on-clear', index)" title="リストの削除">×</td>
       </tr>
     </table>
@@ -48,8 +48,13 @@ export default {
   &__table-cell {
     font-weight: normal;
   }
-  &__table-item:nth-child(even) {
-    background-color: #f2f2f2;
+  &__table-item {
+    &:nth-child(odd) {
+      background-color: #f2f2f2;
+    }
+    &:nth-child(even) {
+      background-color: #fafafa;
+    }
   }
   &__table-cell {
     padding: 0.3em 0;

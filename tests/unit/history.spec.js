@@ -15,7 +15,7 @@ describe('History', () => {
         ]
       }
     })
-    const result = wrapper.find('.result')
+    const result = wrapper.find('#result')
     expect(result.text()).toBe('11')
   })
 })
