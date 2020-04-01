@@ -1,36 +1,36 @@
 <template>
   <div>
     <div class="calc">
-      <h1>Vue Testing Sample</h1>
-      <h3>
-        <select v-model="mode">
+      <h1 class="app-header__title">Vue Testing Sample</h1>
+      <h3 class="calc__title">
+        <select v-model="mode" class="calc__mode">
           <option value="+">足し算</option>
           <option value="-">引き算</option>
           <option value="*">掛け算</option>
           <option value="/">割り算</option>
         </select>
-        <span>をします</span>
+        <span class="clac__mode-stab">をします</span>
       </h3>
-      <p class="explain">数字を入力してください</p>
+      <p class="calc__explain">数字を入力してください</p>
 
-      <form @submit.prevent="submit">
-        <div class="num1">
+      <form class="clac__form" @submit.prevent="submit">
+        <div class="calc__field">
           <label for="num1">値１：</label>
           <input id="num1" type="number" step="0.01" v-model.number="num1" />
         </div>
-        <div class="num2">
+        <div class="calc__field">
           <label for="num2">値２：</label>
           <input id="num2" type="number" step="0.01" v-model.number="num2" />
         </div>
-        <button type="submit">計算</button>
-        <button id="reset" @click.prevent="resetParams">リセット</button>
+        <button class="calc__submit" type="submit">計算</button>
+        <button id="reset" class="calc__reset" @click.prevent="resetParams">リセット</button>
       </form>
 
       <transition name="fade">
-        <p v-if="result || result === 0" class="result">結果： <span>{{ result }}</span></p>
+        <p v-if="result || result === 0" class="calc__result-area">結果： <span class="calc__result">{{ result }}</span></p>
       </transition>
       <transition name="fade">
-        <p v-if="feedback" class="feedback">{{ feedback }}</p>
+        <p v-if="feedback" class="calc__feedback">{{ feedback }}</p>
       </transition>
     </div>
 
@@ -127,38 +127,45 @@ export default {
 </script>
 
 <style scoped lang="scss">
-h1 {
+.app-header__title {
+  line-height: 60px;
   font-weight: normal;
 }
-h3 {
-  margin-bottom: 40px;
-  span {
-    margin-left: 6px;
+.calc {
+  &__title {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+  &__mode {
+    padding: 5px 8px 2px;
+    font-weight: bold;
+    background-color: rgb(247, 247, 247);
+    border-bottom: 3px solid yellowgreen;
+    outline: none;
+    cursor: pointer;
+    
+  }
+  &__mode-stab {
+    display: block;
+    margin-top: 100px;
+    margin-left: 16px;
     font-size: 0.8em;
   }
-}
-select {
-  padding: 5px 8px 2px;
-  font-weight: bold;
-  background-color: rgb(247, 247, 247);
-  border-bottom: 3px solid yellowgreen;
-  outline: none;
-  cursor: pointer;
-}
-.explain {
-  font-size: 0.7em;
-}
-.result {
-  margin-top: 20px;
-  span {
+  &__explain {
+    font-size: 0.7em;
+  }
+  &__result-area {
+    margin-top: 20px;
+  }
+  &__result{
     font-size: 1.1em;
     font-weight: bold;
   }
-}
-.feedback {
-  color: crimson;
-  font-size: 0.7em;
-  transition: 0.5s;
+  &__feedback {
+    color: crimson;
+    font-size: 0.7em;
+    transition: 0.5s;
+  }
 }
 
 /* transition */
