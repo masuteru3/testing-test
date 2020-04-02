@@ -167,7 +167,7 @@ export default {
   }
   &__feedback {
     color: crimson;
-    font-size: 0.7em;
+    font-size: 0.85em;
     transition: 0.5s;
     margin: 12px 0;
   }
@@ -184,10 +184,16 @@ export default {
   &__submit {
     @extend %__button;
     background-color: #4caf50;
+    &:hover {
+      background-color: #37963a;
+    }
   }
   &__reset {
     @extend %__button;
     background-color: #e66a61;
+    &:hover {
+      background-color: #d45950;
+    }
   }
   &__result-area {
     margin-top: 20px;
