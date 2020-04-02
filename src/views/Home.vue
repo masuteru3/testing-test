@@ -14,23 +14,27 @@
       <p class="calc__explain">数字を入力してください</p>
 
       <form class="clac__form" @submit.prevent="submit">
-        <div class="calc__field">
-          <label for="num1">値１：</label>
-          <input id="num1" type="number" step="0.01" v-model.number="num1" />
+        <div class="calc__form-field">
+          <label class="calc__form-label" for="num1">値１：</label>
+          <input id="num1" class="calc__input-number" type="number" step="0.01" v-model.number="num1" />
         </div>
-        <div class="calc__field">
-          <label for="num2">値２：</label>
-          <input id="num2" type="number" step="0.01" v-model.number="num2" />
+        <div class="calc__form-field">
+          <label class="calc__form-label" for="num2">値２：</label>
+          <input id="num2" class="calc__input-number" type="number" step="0.01" v-model.number="num2" />
         </div>
+
+        <transition name="fade">
+          <p v-if="feedback" class="calc__feedback">{{ feedback }}</p>
+        </transition>
+
         <button class="calc__submit" type="submit">計算</button>
         <button id="reset" class="calc__reset" @click.prevent="resetParams">リセット</button>
       </form>
 
       <transition name="fade">
-        <p v-if="result || result === 0" class="calc__result-area">結果： <span class="calc__result">{{ result }}</span></p>
-      </transition>
-      <transition name="fade">
-        <p v-if="feedback" class="calc__feedback">{{ feedback }}</p>
+        <p v-if="result || result === 0" class="calc__result-area">
+          結果： <span class="calc__result">{{ result }}</span>
+        </p>
       </transition>
     </div>
 
@@ -130,11 +134,13 @@ export default {
 .app-header__title {
   line-height: 60px;
   font-weight: normal;
+  font-size: 26px;
 }
 .calc {
   &__title {
     margin-top: 40px;
     margin-bottom: 40px;
+    font-size: 1.2em;
   }
   &__mode {
     padding: 5px 8px 2px;
@@ -143,7 +149,6 @@ export default {
     border-bottom: 3px solid yellowgreen;
     outline: none;
     cursor: pointer;
-    
   }
   &__mode-stab {
     display: block;
@@ -154,17 +159,42 @@ export default {
   &__explain {
     font-size: 0.7em;
   }
-  &__result-area {
-    margin-top: 20px;
-  }
-  &__result{
-    font-size: 1.1em;
-    font-weight: bold;
+  &__input-number {
+    margin: 8px;
+    padding: 8px;
+    border: 1px solid #d4d4d4;
+    border-radius: 3px;
   }
   &__feedback {
     color: crimson;
     font-size: 0.7em;
     transition: 0.5s;
+    margin: 12px 0;
+  }
+
+  %__button {
+    padding: 9px 14px;
+    border-radius: 3px;
+    color: white;
+    font-weight: bold;
+    margin: 7px 10px;
+    border: none;
+    font-size: 0.9em;
+  }
+  &__submit {
+    @extend %__button;
+    background-color: #4caf50;
+  }
+  &__reset {
+    @extend %__button;
+    background-color: #e66a61;
+  }
+  &__result-area {
+    margin-top: 20px;
+  }
+  &__result {
+    font-size: 1.1em;
+    font-weight: bold;
   }
 }
 

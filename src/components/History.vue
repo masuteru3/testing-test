@@ -35,26 +35,33 @@ export default {
   &__title {
     margin-top: 80px;
     margin-bottom: 8px;
+    font-size: 1.1em;
   }
   &__table {
     margin: 0 auto 40px;
     width: 400px;
     border-collapse: collapse;
   }
+  %__height {
+    height: 35px;
+  }
   &__table-header {
+    @extend %__height;
     background-color: #4caf50;
     color: white;
   }
-  &__table-cell {
-    font-weight: normal;
-  }
   &__table-item {
+    @extend %__height;
     &:nth-child(odd) {
       background-color: #f2f2f2;
     }
     &:nth-child(even) {
       background-color: #fafafa;
     }
+  }
+  &__table-cell {
+    font-weight: normal;
+    vertical-align: middle;
   }
   &__table-cell {
     padding: 0.3em 0;
@@ -69,5 +76,5 @@ export default {
       font-weight: bold;
     }
   }
-} 
+}
 </style>
